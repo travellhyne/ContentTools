@@ -58,7 +58,10 @@ class _EditorApp extends ContentTools.ComponentUI
         @_namingProp = namingProp
 
         # Select DOM elements that have been flagged as editable content
-        @_domRegions = document.querySelectorAll(query)
+        if typeof query == 'string'
+          @_domRegions = document.querySelectorAll(query)
+        else if typeof query == 'object' and query.hasOwnProperty 'length'
+          @_domRegions = query
 
         # If there aren't any editiable regions return early leaving the app
         # DORMANT.

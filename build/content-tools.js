@@ -6998,7 +6998,11 @@
         namingProp = 'id';
       }
       this._namingProp = namingProp;
-      this._domRegions = document.querySelectorAll(query);
+      if (typeof query === 'string') {
+        this._domRegions = document.querySelectorAll(query);
+      } else if (typeof query === 'object' && query.hasOwnProperty('length')) {
+        this._domRegions = query;
+      }
       if (this._domRegions.length === 0) {
         return;
       }
